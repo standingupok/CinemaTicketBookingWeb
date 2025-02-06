@@ -1,0 +1,85 @@
+﻿@model cinema_web.Models.Film
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container my-5 py-5">
+<h1>Chi tiết</h1>
+
+    <h4>@Html.DisplayFor(model => model.FilmName)</h4>
+    <hr />
+
+    <div class="row">
+        <div class="card details" style="width: 18rem">
+
+            <div class="card-wrapper">
+                <img src="~/images/@Html.DisplayFor(model => model.Thmb)" class="card-img-top" alt="..." />
+            </div>
+        </div>
+
+        <dl class="row col-6 ">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FilmName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FilmName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Director)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Director)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Category)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Language)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Language)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TimeDuration)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TimeDuration) phút
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+    </div>
+
+    
+
+<div class="mt-1">
+    @if(Model.IsFilming == false){
+        <a>Chưa mở bán</a>
+    }
+    else
+    {
+        <a class="btn btn-primary" asp-action="BuyTicket" asp-route-id="@Model.FilmId">Mua vé</a>
+    }
+        <a asp-action="Index">
+            <svg class="back-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"></path>
+            </svg>Trở về
+        </a>
+</div>
+</div>

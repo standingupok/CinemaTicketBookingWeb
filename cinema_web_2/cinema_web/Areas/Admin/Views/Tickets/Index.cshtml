@@ -1,0 +1,84 @@
+﻿@model IEnumerable<cinema_web.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+    var currAcc = ViewData["CurrentAccount"] as Account;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if(currAcc.RoleId == 1)
+{
+    <div>
+        <a class="btn btn-outline-purple" href="/admin/tickets">Vé</a>
+        <a class="btn btn-outline-purple" href="/admin/films">Phim</a>
+        <a class="btn btn-outline-purple" href="/admin/screenings">Suất chiếu</a>
+        <a class="btn btn-outline-purple" href="/admin/screeningfilms">Suất chiếu của phim</a>
+        <a class="btn btn-outline-purple" href="/admin/accounts">Tài khoản</a>
+        <a class="btn btn-outline-purple" href="/admin/roles">Vai trò</a>
+    </div>
+}
+
+<h1>Vé của bạn</h1>
+
+<!--
+if (currAcc.RoleId == 1)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+-->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FilmName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeatNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Screening.StartTime)
+            </th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FilmName)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Screening.StartTime)
+            </td>
+            <td>
+                @if (currAcc.RoleId == 1)
+                {
+                        <a asp-action="Edit" asp-route-id="@item.TicketId">Chỉnh sửa | </a>
+                        <a asp-action="Details" asp-route-id="@item.TicketId">Chi tiết | </a>
+                        <a asp-action="Delete" asp-route-id="@item.TicketId">Xóa</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-purple" asp-action="Details" asp-route-id="@item.TicketId">Chi tiết</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

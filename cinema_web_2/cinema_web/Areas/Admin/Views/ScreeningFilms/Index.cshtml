@@ -1,0 +1,49 @@
+﻿@model IEnumerable<cinema_web.Models.ScreeningFilm>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div>
+    <a class="btn btn-outline-purple" href="/admin/tickets">Vé</a>
+    <a class="btn btn-outline-purple" href="/admin/films">Phim</a>
+    <a class="btn btn-outline-purple" href="/admin/screenings">Suất chiếu</a>
+    <a class="btn btn-outline-purple" href="/admin/screeningfilms">Suất chiếu của phim</a>
+    <a class="btn btn-outline-purple" href="/admin/accounts">Tài khoản</a>
+    <a class="btn btn-outline-purple" href="/admin/roles">Vai trò</a>
+</div>
+<h1>Quản lý suất chiếu của phim</h1>
+
+<p>
+    <a class ="btn btn-outline-purple" asp-action="Create">Tạo mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FilmId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScreeningId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScreeningId)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { filmid = item.FilmId, screeningId = item.ScreeningId }) |
+                    @Html.ActionLink("Details", "Details", new { filmid = item.FilmId, screeningId = item.ScreeningId }) |
+                    @Html.ActionLink("Delete", "Delete", new { filmid = item.FilmId, screeningId = item.ScreeningId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

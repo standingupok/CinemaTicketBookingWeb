@@ -1,0 +1,168 @@
+﻿@model IEnumerable<cinema_web.Models.Film>
+@{
+    ViewData["Title"] = "Home Page";
+    var filmingFilms = ViewData["FilmingFilms"] as List<Film>;
+    var upComingFilms = ViewData["UpComingFilms"] as List<Film>;
+
+    var roundUp = filmingFilms.Count / 4;
+    var roundUpComingFilms = upComingFilms.Count / 4;
+
+    var lines = roundUp + (filmingFilms.Count % 4 > 0 ? 1 : 0);
+    var upCominglines = roundUpComingFilms + (upComingFilms.Count % 4 > 0 ? 1 : 0);
+    
+}
+
+<section id="carousel-section">
+    <div id="hero-carousel"
+         class="carousel slide"
+         data-bs-ride="carousel"
+         data-bs-touch="true">
+        <div class="carousel-indicators">
+            <button type="button"
+                    data-bs-target="#hero-carousel"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"></button>
+            <button type="button"
+                    data-bs-target="#hero-carousel"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button"
+                    data-bs-target="#hero-carousel"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active c-item">
+                <img src="./images/carousel1.jpg"
+                     class="d-block w-100 c-img"
+                     alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Sắc nét đến từng chi tiết</h1>
+                    <p>Cảm nhận chân thật từng chuyển động trên màn ảnh</p>
+                </div>
+            </div>
+            <div class="carousel-item c-item">
+                <img src="./images/carousel2.jpg"
+                     class="d-block w-100 c-img"
+                     alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Màn hình cong tuyệt hảo</h1>
+                    <p>Đưa người xem đến một không gian hoàn toàn mới</p>
+                </div>
+            </div>
+            <div class="carousel-item c-item">
+                <img src="./images/cinema-space-001-3d-model-max.jpg"
+                     class="d-block w-100 c-img"
+                     alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Âm thanh 8d</h1>
+                    <p>Nâng trải nghiệm người xem lên một tầm cao mới.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#hero-carousel"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#hero-carousel"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>=
+</section>
+
+<!--Screening Film-->
+<section id="screening-film">
+    <h2 class="section-tittle text-center">PHIM ĐANG CHIẾU</h2>
+@for(int line = 0; line < lines ; line++)
+{
+    <div class="d-flex  justify-content-center movie-wrapper">
+        @for (int i = 0; i < 4 ; i++)
+        {
+            if (line * 4 + i == filmingFilms.Count)
+            {
+                break;    
+            }
+            else
+            {
+            <div class=" p-2">
+                <a class="" asp-action="Details" asp-route-id="@filmingFilms[line*4+i].FilmId">
+                            <div class="card d-flex justify-content-center" style="width: 18rem">
+                        <div class="card-wrapper">
+                                    <img src="~/images/@filmingFilms[line*4+i].Thmb" class="card-img-top" alt="@filmingFilms[line*4+i].FilmName" />
+                        </div>
+                        <div class="card-body">
+                           <h5 class="card-title">@filmingFilms[line*4+i].FilmName</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            }
+        }
+        
+    </div>
+} 
+</section>
+
+<!--Testimonial-->
+<section id="testimonial" class="slant py-5 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <img src="./images/carousel1.jpg"
+                     data-mdb-lazy-load-init
+                     data-mdb-lazy-load-initialized="true"
+                     class="animation fade-in"
+                     alt="" />
+            </div>
+            <div class="col-12 col-lg-6 d-flex flex-column align-items-center justify-content-center text-white">
+                <h1>BEYONCE YOUR IMAGINATION</h1>
+                <p>
+
+                    Rạp phim Rạp Phim là điểm đến lý tưởng cho những người yêu thích điện ảnh, nơi hội tụ những trải nghiệm giải trí độc đáo và đầy ấn tượng. Với hệ thống loa hiện đại và màn hình cong kích thước siêu rộng, Rạp Phim không chỉ là nơi giải trí mà còn là không gian thăng hoa cho trái tim của người xem. Tận hưởng mỗi cảnh hành động, mỗi khoảnh khắc lãng mạn và mỗi trải nghiệm phiêu lưu với cảm giác sống động và chân thực nhất, Rạp Phim hứa hẹn mang đến cho quý khán giả những khoảnh khắc đáng nhớ và tận hưởng không gian điện ảnh tuyệt vời nhất.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Up Coming Film-->
+<section id="upcoming-film" class="py-5 ">
+    <h2 class="section-tittle text-center">PHIM SẮP CHIẾU</h2>
+@for (int line = 0; line < upCominglines; line++)
+{
+    <div class="d-flex justify-content-center movie-wrapper">
+        @for (int i = 0; i < 4; i++)
+        {
+            if (line * 4 + i == upComingFilms.Count)
+            {
+                break;
+            }
+            else
+            {
+                <div class=" p-1">
+                    <a class="" asp-action="Details" asp-route-id="@upComingFilms[line*4+i].FilmId">
+                            <div class="card  d-flex justify-content-center" style="width: 18rem">
+                            
+                            <div class="card-wrapper">
+                                    <img src="~/images/@upComingFilms[line*4+i].Thmb" class="card-img-top" alt="@upComingFilms[line*4+i].FilmName" />
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@upComingFilms[line*4+i].FilmName</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </div>
+}
+</section>

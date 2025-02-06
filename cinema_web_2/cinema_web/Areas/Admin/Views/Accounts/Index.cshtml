@@ -1,0 +1,67 @@
+﻿@model IEnumerable<cinema_web.Models.Account>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div>
+    <a class="btn btn-outline-purple" href="/admin/tickets">Vé</a>
+    <a class="btn btn-outline-purple" href="/admin/films">Phim</a>
+    <a class="btn btn-outline-purple" href="/admin/screenings">Suất chiếu</a>
+    <a class="btn btn-outline-purple" href="/admin/screeningfilms">Suất chiếu của phim</a>
+    <a class="btn btn-outline-purple" href="/admin/accounts">Tài khoản</a>
+    <a class="btn btn-outline-purple" href="/admin/roles">Vai trò</a>
+</div>
+<h1>Quản lý tài khoản</h1>
+
+<p>
+    <a asp-action="Create">Tạo mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.RoleId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AccountId">Chỉnh sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.AccountId">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.AccountId">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

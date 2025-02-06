@@ -1,0 +1,55 @@
+﻿@model IEnumerable<cinema_web.Models.Screening>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div>
+    <a class="btn btn-outline-purple" href="/admin/tickets">Vé</a>
+    <a class="btn btn-outline-purple" href="/admin/films">Phim</a>
+    <a class="btn btn-outline-purple" href="/admin/screenings">Suất chiếu</a>
+    <a class="btn btn-outline-purple" href="/admin/screeningfilms">Suất chiếu của phim</a>
+    <a class="btn btn-outline-purple" href="/admin/accounts">Tài khoản</a>
+    <a class="btn btn-outline-purple" href="/admin/roles">Vai trò</a>
+</div>
+<h1>Quản lý suất chiếu</h1>
+
+<p>
+    <a class ="btn btn-outline-purple" asp-action="Create">Tạo mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalSeats)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSeats)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ScreeningId">Chỉnh sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.ScreeningId">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.ScreeningId">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
